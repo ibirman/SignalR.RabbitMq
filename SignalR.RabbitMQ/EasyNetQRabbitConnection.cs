@@ -20,17 +20,17 @@ namespace SignalR.RabbitMQ
                 : RabbitHutch.CreateBus(configuration.AmpqConnectionString).Advanced;
 
             //wire up the reconnection handler
-            _bus.Connected += OnReconnection;
+            //_bus.Connected += OnReconnection;
             
             //wire up the disconnection handler
-            _bus.Disconnected += OnDisconnection;
+            //_bus.Disconnected += OnDisconnection;
         }
 
         public override void Send(RabbitMqMessageWrapper message)
         {
             var messageToSend = new Message<RabbitMqMessageWrapper>(message);
             messageToSend.Properties.Headers.Add("forward_exchange", Configuration.ExchangeName);
-            _bus.Publish(_stampExchange, string.Empty, false, false, messageToSend);
+            _bus.Publish(_stampExchange, string.Empty, false, messageToSend);
         }
 
         public override void StartListening()

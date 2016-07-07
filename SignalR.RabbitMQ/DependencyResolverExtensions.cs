@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Messaging;
 
@@ -14,9 +15,14 @@ namespace SignalR.RabbitMQ
             }
 
             var bus = new Lazy<RabbitMqMessageBus>(() => new RabbitMqMessageBus(resolver, configuration));
-            resolver.Register(typeof(IMessageBus), () => bus.Value);
+	        while (!bus.IsValueCreated)
+	        {
+		        Thread.Sleep(1000);
+				Console.WriteLine("Sleeping");
+	        }
+	        resolver.Register(typeof (IMessageBus), () => bus.Value);
 
-            return resolver;
+	        return resolver;
         }
 
         public static IDependencyResolver UseRabbitMqAdvanced(this IDependencyResolver resolver, RabbitConnectionBase myConnection, RabbitMqScaleoutConfiguration configuration)

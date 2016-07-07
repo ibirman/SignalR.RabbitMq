@@ -27,13 +27,15 @@ namespace SignalR.RabbitMQ.Example
            
             var factory = new ConnectionFactory
             {
-                UserName = "guest",
-                Password = "guest",
-                HostName = "localhost"
+                UserName = "admin",
+                Password = "admin",
+                HostName = "http://vbrick-haproxy-1.lab.vb.loc/",
+				AutomaticRecoveryEnabled = true,
+				TopologyRecoveryEnabled = true
             };
 
             var exchangeName = "SignalR.RabbitMQ-Example";
-            var configuration = new RabbitMqScaleoutConfiguration(factory, exchangeName);
+            var configuration = new RabbitMqScaleoutConfiguration(factory, exchangeName, "");
             GlobalHost.DependencyResolver.UseRabbitMq(configuration);
         }
     }

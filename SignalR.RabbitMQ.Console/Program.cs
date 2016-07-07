@@ -13,9 +13,9 @@ namespace SignalR.RabbitMQ.Console
         {
             var factory = new ConnectionFactory
             {
-                UserName = "guest",
-                Password = "guest",
-                HostName = "localhost"
+                UserName = "admin",
+                Password = "admin",
+                HostName = "vbrick-haproxy-1.lab.vb.loc"
             };
 
             var exchangeName = "SignalR.RabbitMQ-Example";
@@ -32,14 +32,13 @@ namespace SignalR.RabbitMQ.Console
                         int i = 0;
                         while (true)
                         {
-                            var message = string.Format("Message Id - {0}, Message Padded To {1} bytes." , i, examplePacketSize);
+                            var message = $"Message Id - {i}, Message Padded To {examplePacketSize} bytes.";
                             var noise = message.PadRight(examplePacketSize, '-');
 
                             hubContext.Clients.All.onConsoleMessage(noise);
                             System.Console.WriteLine(i);
                             i++;
                             Thread.Sleep(100);
-
                         }
                     }
                 );
