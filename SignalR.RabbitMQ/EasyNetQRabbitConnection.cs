@@ -1,7 +1,7 @@
-using EasyNetQ;
-using EasyNetQ.Topology;
 using System;
 using System.Threading.Tasks;
+using EasyNetQ;
+using EasyNetQ.Topology;
 
 namespace SignalR.RabbitMQ
 {

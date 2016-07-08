@@ -1,8 +1,8 @@
-﻿
-using Microsoft.AspNet.SignalR;
-using RabbitMQ.Client;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNet.SignalR;
+using RabbitMQ.Client;
 using SignalR.RabbitMq.Console;
 
 namespace SignalR.RabbitMQ.Console
@@ -32,7 +32,7 @@ namespace SignalR.RabbitMQ.Console
                         int i = 0;
                         while (true)
                         {
-                            var message = string.Format("Message Id - {0}, Message Padded To {1} bytes." , i, examplePacketSize);
+                            var message = $"Message Id - {i}, Message Padded To {examplePacketSize} bytes.";
                             var noise = message.PadRight(examplePacketSize, '-');
 
                             hubContext.Clients.All.onConsoleMessage(noise);

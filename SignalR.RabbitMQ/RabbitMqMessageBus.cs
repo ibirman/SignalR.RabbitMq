@@ -2,8 +2,8 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
+using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Messaging;
 
 namespace SignalR.RabbitMQ
@@ -26,7 +26,7 @@ namespace SignalR.RabbitMQ
         {
 	        if (configuration == null)
             {
-                throw new ArgumentNullException("configuration");
+                throw new ArgumentNullException(nameof(configuration));
             }
 
             _rabbitConnectionBase = advancedConnectionInstance ?? new EasyNetQRabbitConnection(configuration);
@@ -57,9 +57,9 @@ namespace SignalR.RabbitMQ
 
 		protected override void Dispose(bool disposing)
 		{
-			if (disposing && _rabbitConnectionBase != null)
+			if (disposing)
 			{
-				_rabbitConnectionBase.Dispose();
+				_rabbitConnectionBase?.Dispose();
 			}
 
 			base.Dispose(disposing);

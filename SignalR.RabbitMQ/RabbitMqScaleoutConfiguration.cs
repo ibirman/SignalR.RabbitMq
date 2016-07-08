@@ -11,12 +11,12 @@ namespace SignalR.RabbitMQ
         {
             if (string.IsNullOrEmpty(ampqConnectionString))
             {
-                throw new ArgumentNullException("ampqConnectionString");
+                throw new ArgumentNullException(nameof(ampqConnectionString));
             }
 
             if (string.IsNullOrEmpty(exchangeName))
             {
-                throw new ArgumentNullException("exchangeName");
+                throw new ArgumentNullException(nameof(exchangeName));
             }
 
             AmpqConnectionString = ampqConnectionString;
@@ -28,18 +28,19 @@ namespace SignalR.RabbitMQ
         {
             if (connectionfactory == null)
             {
-                throw new ArgumentNullException("connectionfactory");
+                throw new ArgumentNullException(nameof(connectionfactory));
             }
 
             if (string.IsNullOrEmpty(exchangeName))
             {
-                throw new ArgumentNullException("exchangeName");
+                throw new ArgumentNullException(nameof(exchangeName));
             }
 #if DEBUG
             //no heartbeat for debugging
-            var ampqConnectionString = string.Format("host={0};virtualHost={1};username={2};password={3}", connectionfactory.HostName, connectionfactory.VirtualHost, connectionfactory.UserName, connectionfactory.Password);
+            var ampqConnectionString =
+	            $"host={connectionfactory.HostName};virtualHost={connectionfactory.VirtualHost};username={connectionfactory.UserName};password={connectionfactory.Password}";
 #else
-            var ampqConnectionString = string.Format("host={0};virtualHost={1};username={2};password={3};requestedHeartbeat=10", connectionfactory.HostName, connectionfactory.VirtualHost, connectionfactory.UserName, connectionfactory.Password);
+            var ampqConnectionString = $"host={connectionfactory.HostName};virtualHost={connectionfactory.VirtualHost};username={connectionfactory.UserName};password={connectionfactory.Password};requestedHeartbeat=10";
 #endif
             
             AmpqConnectionString = ampqConnectionString;
@@ -51,12 +52,12 @@ namespace SignalR.RabbitMQ
         {
             if (bus == null)
             {
-                throw new ArgumentNullException("bus");
+                throw new ArgumentNullException(nameof(bus));
             }
             
             if (string.IsNullOrEmpty(exchangeName))
             {
-                throw new ArgumentNullException("exchangeName");
+                throw new ArgumentNullException(nameof(exchangeName));
             }
 
             Bus = bus;

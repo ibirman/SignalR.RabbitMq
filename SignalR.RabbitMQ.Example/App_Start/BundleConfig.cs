@@ -1,4 +1,4 @@
-﻿using System.Web;
+﻿using System;
 using System.Web.Optimization;
 
 namespace SignalR.RabbitMQ.Example

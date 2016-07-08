@@ -8,7 +8,7 @@ namespace SignalR.RabbitMQ
         {
             if(configuration == null)
             {
-                throw new ArgumentNullException("configuration");
+                throw new ArgumentNullException(nameof(configuration));
             }
 
             Configuration = configuration;
@@ -36,10 +36,7 @@ namespace SignalR.RabbitMQ
 
         protected void OnReconnection(object sender, EventArgs e)
         {
-            if (OnReconnectionAction != null)
-            {
-                OnReconnectionAction.Invoke();
-            }
+	        OnReconnectionAction?.Invoke();
         }
 
         protected void OnDisconnection(object sender, EventArgs e)
@@ -50,7 +47,7 @@ namespace SignalR.RabbitMQ
             }
         }
 
-        protected void OnMessage(RabbitMqMessageWrapper message)
+	    protected void OnMessage(RabbitMqMessageWrapper message)
         {
             OnMessageReceived.Invoke(message);
         }
