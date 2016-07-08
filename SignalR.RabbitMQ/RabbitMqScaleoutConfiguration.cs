@@ -18,8 +18,8 @@ namespace SignalR.RabbitMQ
                 throw new ArgumentNullException("exchangeName");
             }
 
-            ConnectionFactory = connectionfactory;
-            ExchangeName = exchangeName;
+	        ConnectionFactory = connectionfactory;
+			ExchangeName = exchangeName;
             QueueName = queueName;
             StampExchangeName = stampExchangeName;
         }
