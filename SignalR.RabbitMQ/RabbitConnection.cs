@@ -59,7 +59,7 @@ namespace SignalR.RabbitMQ
                 }
             };
 
-            _subscribeModel.BasicConsume(Configuration.QueueName, noAck: false, consumer: consumer);
+            _subscribeModel.BasicConsume(Configuration.QueueName, autoAck: false, consumer: consumer);
         }
 
         public override void Dispose()
